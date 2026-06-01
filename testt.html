@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Compromised</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            color: #0f0;
+            font-family: 'Share Tech Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Efekt Glitch dla głównego napisu */
+        .glitch {
+            font-size: 5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00,
+                -0.025em 0.05em 0 #0000ff;
+            animation: glitch 1s infinite;
+        }
+
+        .glitch span {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00, -0.025em 0.05em 0 #0000ff; }
+            14% { text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00, -0.025em 0.05em 0 #0000ff; }
+            15% { text-shadow: -0.05em -0.025em 0 #ff0000, 0.025em 0.025em 0 #00ff00, -0.05em -0.05em 0 #0000ff; }
+            49% { text-shadow: -0.05em -0.025em 0 #ff0000, 0.025em 0.025em 0 #00ff00, -0.05em -0.05em 0 #0000ff; }
+            50% { text-shadow: 0.025em 0.05em 0 #ff0000, 0.05em 0 0 #00ff00, 0 -0.05em 0 #0000ff; }
+            99% { text-shadow: 0.025em 0.05em 0 #ff0000, 0.05em 0 0 #00ff00, 0 -0.05em 0 #0000ff; }
+            100% { text-shadow: -0.025em 0 0 #ff0000, -0.025em -0.025em 0 #00ff00, -0.025em -0.05em 0 #0000ff; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #ccc;
+        }
+
+        .blink {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: #ff003c;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Style dla trybu "chaos" */
+        .fake-popup {
+            position: absolute;
+            background: #d4d0c8;
+            border: 2px solid #fff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            color: black;
+            padding: 2px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 300px;
+            z-index: 9999;
+        }
+        
+        .popup-header {
+            background: #000080;
+            color: white;
+            padding: 3px 5px;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .popup-content {
+            padding: 15px;
+            text-align: center;
+            background: #d4d0c8;
+            font-size: 14px;
+        }
+
+        .chaos-mode {
+            animation: shake 0.1s infinite, flash 0.2s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(2px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(0px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(2px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(2px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        @keyframes flash {
+            0%, 100% { filter: invert(0%); }
+            50% { filter: invert(100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-content">
+        <div class="glitch" data-text="HACKED BY CYBERSCOPE">HACKED BY CYBERSCOPE</div>
+        <div class="subtitle">Wszystkie wasze dane zostały zaszyfrowane. System przejęty.</div>
+        <div class="blink">[ Naciśnij SPACJĘ ]</div>
+    </div>
+
+    <script>
+        let triggered = false;
+
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space' && !triggered) {
+                event.preventDefault();
+                triggered = true;
+                initiatePtoszekProtocol();
+            }
+        });
+
+        function initiatePtoszekProtocol() {
+            // 1. Włączenie pełnego ekranu (jeśli przeglądarka pozwoli)
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch((e) => console.log(e));
+            }
+
+            // 2. Dodanie klas chaosu do body
+            document.body.classList.add('chaos-mode');
+            document.getElementById('main-content').style.display = 'none';
+
+            // 3. Generowanie przeraźliwych dźwięków przez Web Audio API
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            setInterval(() => {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                oscillator.type = ['sawtooth', 'square'][Math.floor(Math.random() * 2)];
+                oscillator.frequency.setValueAtTime(100 + Math.random() * 2000, audioCtx.currentTime);
+                
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            }, 100);
+
+            // 4. Spamowanie fałszywymi popupami w obrębie okna (omija blokady przeglądarek)
+            let popupsCreated = 0;
+            const popupInterval = setInterval(() => {
+                if (popupsCreated > 150) {
+                    clearInterval(popupInterval);
+                    return;
+                }
+
+                const popup = document.createElement('div');
+                popup.className = 'fake-popup';
+                popup.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+                popup.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+
+                popup.innerHTML = `
+                    <div class="popup-header">
+                        <span>CRITICAL ERROR</span>
+                        <span>X</span>
+                    </div>
+                    <div class="popup-content">
+                        <b>CYBERSCOPE PAYLOAD INJECTED!</b><br><br>
+                        Ucieczka jest niemożliwa.<br>
+                        Trwa formatowanie dysku... ${Math.floor(Math.random() * 100)}%
+                    </div>
+                `;
+                document.body.appendChild(popup);
+                popupsCreated++;
+
+            }, 50);
+
+            // 5. Wibracje (działa tylko na urządzeniach mobilnych)
+            if ("vibrate" in navigator) {
+                setInterval(() => {
+                    navigator.vibrate([200, 100, 200]);
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>
